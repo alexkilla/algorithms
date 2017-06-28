@@ -6,6 +6,9 @@ import arrays.iteration.IteratorOutOfBoundsException;
 import org.testng.annotations.Test;
 
 import static junit.framework.TestCase.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertSame;
 
@@ -259,6 +262,19 @@ public abstract class AbstractListTestCase {
     }
 
     @Test
+    public void testEmptyIterationGeneric() {
+        List list = createList();
+        Iterator iterator = list.iterator();
+        assertTrue(iterator.isDone());
+        try {
+            iterator.current();
+            fail();
+        } catch (IteratorOutOfBoundsException e) {
+// expected
+        }
+    }
+
+    @Test
     public void testForwardIteration() {
         List list = createList();
         list.add(VALUE_A);
@@ -343,5 +359,35 @@ public abstract class AbstractListTestCase {
         list.clear();
         assertTrue(list.isEmpty());
         assertEquals(0, list.size());
+    }
+
+    @Test
+    public void testEquals() {
+        List listOne = createList();
+        List listTwo = createList();
+        List listThree = createList();
+        addAllDefaultValuesTo(listOne);
+        addAllDefaultValuesTo(listTwo);
+        listThree.add(VALUE_A);
+        listThree.add(VALUE_B);
+        assertThat(listOne.equals(listTwo), is(true));
+        assertThat(listTwo.equals(listOne), is(true));
+        assertThat(listTwo.equals(listThree), is(false));
+        assertThat(listOne.equals(listThree), is(false));
+
+    }
+
+    @Test
+    public void testToString() {
+        List list = createList();
+        addAllDefaultValuesTo(list);
+        String expected = "[" + VALUE_A + "," + VALUE_B + "," + VALUE_C + "]";
+        assertThat(list.toString(), equalTo(expected));
+    }
+
+    private void addAllDefaultValuesTo(List list) {
+        list.add(VALUE_A);
+        list.add(VALUE_B);
+        list.add(VALUE_C);
     }
 }

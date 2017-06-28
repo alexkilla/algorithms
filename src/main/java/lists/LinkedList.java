@@ -3,7 +3,7 @@ package lists;
 import arrays.iteration.Iterator;
 import arrays.iteration.IteratorOutOfBoundsException;
 
-public class LinkedList implements List {
+public class LinkedList extends AbstractList{
 
     private final Element _headAndTail = new Element(null);
     private int _size;

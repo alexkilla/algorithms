@@ -3,7 +3,7 @@ package lists;
 import arrays.iteration.ArrayIterator;
 import arrays.iteration.Iterator;
 
-public class ArrayList implements List {
+public class ArrayList extends AbstractList{
 
     private static int DEFAULT_INITIAL_CAPACITY = 16;
     private Object[] _array;
@@ -18,6 +18,15 @@ public class ArrayList implements List {
         assert initialCapacity > 0 : "Initial capacity should be greater than 0";
         _capacity = initialCapacity;
         clear();
+    }
+
+    public ArrayList(Object[] array) {
+        assert array != null: "Array cannot be null";
+        _capacity = array.length;
+        clear();
+
+        this._array = array;
+        _size = array.length;
     }
 
     public void insert(int index, Object value) {
@@ -121,6 +130,8 @@ public class ArrayList implements List {
     }
 
     public Iterator iterator() {
+        //This is just to prove GenericListIteratorWorks
+        //return new GenericListIterator(this);
         return new ArrayIterator(_array, 0, _size);
     }
 }
