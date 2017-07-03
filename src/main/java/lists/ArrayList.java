@@ -103,6 +103,7 @@ public class ArrayList extends AbstractList{
         return _array[index];
     }
 
+    //Comment this if you want to try the generic indexOfMethod.
     public int indexOf(Object value) {
         for(int index = 0; index < _size; index++){
             if (_array[index].equals(value)){

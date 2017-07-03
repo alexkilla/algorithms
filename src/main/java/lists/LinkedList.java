@@ -95,6 +95,7 @@ public class LinkedList extends AbstractList{
         return getElement(index).getValue();
     }
 
+    //Comment this if you want to try the generic indexOfMethod.
     public int indexOf(Object value) {
         Element element = _headAndTail.getNext();
         for (int i = 0; i < _size; i++) {
@@ -108,7 +109,7 @@ public class LinkedList extends AbstractList{
 
 
     public boolean contains(Object value) {
-        return indexOf(value) < 0 ? false : true;
+        return indexOf(value) >= 0;
     }
 
     public int size() {

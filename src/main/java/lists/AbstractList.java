@@ -38,12 +38,23 @@ public abstract class AbstractList implements List {
         for (iterator.first();
              !iterator.isDone();
              iterator.next()) {
-            toString+=(first == true) ? "":",";
+            toString += (first) ? "" : ",";
             first = false;
             toString += iterator.current();
         }
         return toString + "]";
     }
 
-
+    public int indexOf(Object value) {
+        assert value != null : "value cannot be null";
+        Iterator iterator = iterator();
+        int index = 0;
+        for (iterator.first();!iterator.isDone();iterator.next()){
+            if (iterator.current().equals(value)){
+                return index;
+            }
+            ++index;
+        }
+        return -1;
+    }
 }
